@@ -10,7 +10,6 @@ on:
 
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: ${{ github.repository_owner }}/simple-python-app
 
 jobs:
   checkout:
@@ -92,7 +91,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/simple-python-app
           tags: |
             type=sha,prefix={{branch}}-
             type=ref,event=branch
@@ -134,7 +133,7 @@ jobs:
 
       - name: Create deployment manifest
         run: |
-          sed -e "s|docker.io/USERNAME/simple-python-app:COMMIT_SHA|${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.image-tag.outputs.tag }}|g" k8s/deployment.yaml > k8s/deployment-updated.yaml
+          sed -e "s|docker.io/USERNAME/simple-python-app:COMMIT_SHA|${{ env.REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/simple-python-app:${{ steps.image-tag.outputs.tag }}|g" k8s/deployment.yaml > k8s/deployment-updated.yaml
           cat k8s/deployment-updated.yaml
 
       - name: Deploy to Kubernetes
