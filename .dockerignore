@@ -1,0 +1,25 @@
+# Ignore Python cache files
+__pycache__
+
+# Ignore Dockerfile and Docker-related files
+Dockerfile
+.dockerignore
+
+# Ignore virtual environment directories
+venv/
+env/
+
+# Ignore local configuration files
+*.local
+
+# Ignore test output
+*.log
+*.xml
+*.html
+
+# Ignore any other files that should not be included in the Docker image
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
