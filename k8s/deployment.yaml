@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: simple-python-app
-        image: ghcr.io/USERNAME/simple-python-app:COMMIT_SHA
+        image: docker.io/USERNAME/simple-python-app:COMMIT_SHA
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
